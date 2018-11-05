@@ -2,7 +2,7 @@
     <!-- An jeweilige Aufgabe anpassen -->
     <property name="grn.task"    value="A3" />
     <property name="grn.group"   value="101" />
-    <property name="main-class"  value="de.uulm.in.vs.grn.a1.NumberGuessingGameThreadedServer"/>
+    <property name="main-class"  value="de.uulm.in.vs.grn.a3.NumberGuessingGameThreadedServer"/>
 
     <!-- Unveraendert lassen! -->
     <property name="src.dir"     value="src" />

@@ -116,7 +116,7 @@ public class SochagramClient {
         header[0] = arr[0];
         header[1] = arr[1];
         header[2] = arr[2];
-        header[3] = arr[3];
+        header[3] = arr[3]; rea
 
         //concat the two byte arrays
         byte[] output = new byte[header.length + payload.length];

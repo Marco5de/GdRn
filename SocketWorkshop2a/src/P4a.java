@@ -4,6 +4,8 @@ import java.net.Socket;
 import java.util.HashMap;
 import java.util.Map;
 
+//reverse engineering of wireshark trace to implent the protocoll
+
 public class P4a {
     private static final int PORT = 7777;
     private static Map<String, String> storage = new HashMap<>();

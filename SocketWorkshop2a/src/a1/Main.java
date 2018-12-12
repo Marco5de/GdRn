@@ -7,6 +7,11 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 import java.util.concurrent.LinkedBlockingQueue;
 
+
+/**
+ * if client disconnects there is a null pointer exception thrown which is caught but not taken care of(inside ConReader)
+ */
+
 public class Main {
 
     private static ServerSocket server = null;

@@ -24,8 +24,14 @@ public class ConReader implements Runnable {
             try {
                 queue.put(str = (new BufferedReader(new InputStreamReader(client.getInputStream())).readLine()));
                 con.add(str);
-            } catch (IOException | InterruptedException e) {
-                e.printStackTrace();
+            } catch (IOException | InterruptedException  | NullPointerException e) {
+                System.out.println("Client disconnected");
+                try {
+                    client.close();
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
+                break;
             }
         }
 

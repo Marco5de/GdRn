@@ -1,5 +1,6 @@
 package de.uulm.in.vs.grn.chatService;
 
+import de.uulm.in.vs.grn.chatService.CCM.request.CCMRequest;
 import de.uulm.in.vs.grn.chatService.upConnection.CommandConnection;
 import de.uulm.in.vs.grn.chatService.upConnection.PubSubConnection;
 
@@ -18,6 +19,10 @@ public class GRNCPclient {
 
 
     public boolean login(String username){
+        //Todo hard coded username for testing purposes
+        CCMRequest request = new CCMRequest(CCMRequest.requestTypes.Login,"Marco5De");
+        String message = request.buildRequest();
+        commandConnection.sendMessage(message);
 
     }
 

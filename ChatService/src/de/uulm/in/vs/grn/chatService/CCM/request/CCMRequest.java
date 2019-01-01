@@ -17,7 +17,7 @@ public class CCMRequest {
     }
 
 
-    protected String buildRequest() {
+    public String buildRequest() {
         switch (this.requestType) {
             case Bye:
                 return buildBye();

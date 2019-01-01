@@ -74,6 +74,13 @@ public class ServerConnectionImpl implements VoidRunnerBoard.ServerConnection {
         this.updateHandler = Executors.newSingleThreadScheduledExecutor();
         updateHandler.execute(()->{
             //todo execute server update in here
+            try {
+                while(true) {
+                    handleUpdate();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         });
     }
 
@@ -89,6 +96,40 @@ public class ServerConnectionImpl implements VoidRunnerBoard.ServerConnection {
         soc.send(new DatagramPacket(bb.array(),4,iaddr,PORT));
         System.out.println("---UPDATE SEND TO SERVER---");
     }
+
+    //not receiving any updates without connecting to university network
+    public void handleUpdate() throws IOException {
+        //generic buffersize to handle max size of +120bytes
+        DatagramPacket packet = new DatagramPacket(ByteBuffer.allocate(256).array(),256);
+        //blocks until it receives Datagram from Server
+        System.out.println("Waiting for update from Server");
+        soc.receive(packet);
+        byte data[] = packet.getData();
+        ByteBuffer dataBuffer = ByteBuffer.wrap(packet.getData());
+        //parsing response
+        int noUpdates = dataBuffer.getInt();
+        System.out.println("Received Update for " + noUpdates + " clients");
+        for(int i=0; i<noUpdates;i++){
+                byte tmp[] = new byte[3];
+                System.arraycopy(data,i*12,tmp,0,tmp.length);
+                int playerid = byteArrTo24BitInt(tmp);
+                System.out.println("Received playerID: " + playerid);
+
+                if(data[4]!=0){
+                    System.out.println("Still alive TODO HANDLE");
+                }
+
+                //reads x and y coordinates
+                ByteBuffer intBuffer = ByteBuffer.wrap(data,(i*12)+4,4);
+                int xpos = intBuffer.getInt();
+                intBuffer = ByteBuffer.wrap(data,(i*12)+8,4);
+                int ypos = intBuffer.getInt();
+                System.out.println("res: x positon = " + xpos + " and y postition= " + ypos);
+            }
+
+        System.out.println("\n\n");
+    }
+
 
     /**
      * sends message to Server to init connection » sends 0x00 0x00 0x00 0x00

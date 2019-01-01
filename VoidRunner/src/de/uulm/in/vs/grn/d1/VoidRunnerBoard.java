@@ -99,8 +99,9 @@ public class VoidRunnerBoard extends JPanel {
     public void setBoard(boolean[][] board) {
         this.board = board;
 
+        boardHeight = (int)(DOT_SIZE * (board[0].length+1.5));
         boardWidth = DOT_SIZE * board.length - 1;
-        boardHeight = DOT_SIZE * board[0].length - 1;
+        //boardHeight = DOT_SIZE * board[0].length - 1;
 
         setPreferredSize(new Dimension(boardWidth, boardHeight));
     }

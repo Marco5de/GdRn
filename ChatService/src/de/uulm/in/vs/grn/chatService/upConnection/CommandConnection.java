@@ -7,7 +7,7 @@ import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.Socket;
 
-public class CommandConnection implements Runnable {
+public class CommandConnection /*implements Runnable*/ {
     Socket socket = null;
     Controller controller = null;
     PrintWriter pw = null;

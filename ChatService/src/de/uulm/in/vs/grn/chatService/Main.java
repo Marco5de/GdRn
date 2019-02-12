@@ -1,5 +1,7 @@
 package de.uulm.in.vs.grn.chatService;
 
+import java.io.IOException;
+
 public class Main {
 
 /*
@@ -14,9 +16,11 @@ IPv6-Adresse: 2001:7c0:900:4d:216:3eff:fe2f:a514
     private static final int pubsubPort = 8123;
     private static final String addr = "134.60.77.232";
 
-    public static void main(String args[]){
+    public static void main(String args[]) throws IOException {
         Controller controller = new Controller();
         GRNCPclient client = new GRNCPclient(addr,commandPort,pubsubPort,controller);
+        client.login("Marco5de");
+
     }
 }
 

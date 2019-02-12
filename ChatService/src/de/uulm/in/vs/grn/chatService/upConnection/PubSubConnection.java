@@ -15,7 +15,7 @@ public class PubSubConnection implements Runnable {
     Controller controller = null;
     Socket socket = null;
 
-    public PubSubConnection(String host, int port,Controller controller){
+    public PubSubConnection(String host, int port,Controller controller) throws IOException {
         this.socket = new Socket(host,port);
         this.controller = controller;
     }

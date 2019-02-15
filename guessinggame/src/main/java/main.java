@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 
+//Todo parsing des namens und craft
 
 public class main {
     public static void main(String args[]) throws IOException {
@@ -28,41 +29,18 @@ public class main {
         }
 
         String json = response.toString();
-        System.out.println(json);
 
         JsonParser parser = new JsonParser();
-        JsonElement jsonTree = parser.parse(json);
+        JsonElement ele = parser.parse(json);
+        JsonObject obj = ele.getAsJsonObject();
+        JsonArray jsonArray = obj.getAsJsonArray("people");
 
-        System.out.println(jsonTree.toString());
-        JsonObject obj=null;
-        if(jsonTree.isJsonObject()){
-            System.out.println("\nGetting as Json Object");
-            obj = jsonTree.getAsJsonObject();
-        }else if(jsonTree.isJsonArray()){
-            System.out.println("\nGetting as Json Array");
-            JsonArray jsonArr= jsonTree.getAsJsonArray();
-        }else if(jsonTree.isJsonPrimitive()){
-            System.out.println("\nGetting as Json Primitive");
-            JsonPrimitive jsonObject = jsonTree.getAsJsonPrimitive();
-        }else if(jsonTree.isJsonNull()){
-            throw new NullPointerException("Json NULL");
+        System.out.println("Currently are " + jsonArray.size() + " people in space!");
+        for(int i=0; i<jsonArray.size();i++) {
+            //System.out.println("The " +i +"th person in space is " + jsonArray.get(i).toString());
+            JsonObject x = jsonArray.get(i).getAsJsonObject();
+            System.out.println("Name: " +x.get("name")+ " on craft " + x.get("craft"));
         }
-
-
-
-        JsonElement ele = obj.get("people");
-        JsonObject obj2 = null;
-
-        System.out.println(ele.toString());
-
-        if(ele.isJsonArray())
-            System.out.println("Is json array");
-
-        JsonArray jsonArray = ele.getAsJsonArray();
-        System.out.println("\nPrint single entries\n");
-        for(JsonElement x : jsonArray)
-            System.out.println(x.toString());
-
         bufferedReader.close();
     }
 
